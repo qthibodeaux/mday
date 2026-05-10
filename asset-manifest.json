@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/mday/static/css/main.d175e981.css",
-    "main.js": "/mday/static/js/main.9d19c065.js",
+    "main.css": "/mday/static/css/main.12c33c62.css",
+    "main.js": "/mday/static/js/main.ed6d91af.js",
     "static/js/453.fc646f18.chunk.js": "/mday/static/js/453.fc646f18.chunk.js",
     "index.html": "/mday/index.html",
-    "main.d175e981.css.map": "/mday/static/css/main.d175e981.css.map",
-    "main.9d19c065.js.map": "/mday/static/js/main.9d19c065.js.map",
+    "main.12c33c62.css.map": "/mday/static/css/main.12c33c62.css.map",
+    "main.ed6d91af.js.map": "/mday/static/js/main.ed6d91af.js.map",
     "453.fc646f18.chunk.js.map": "/mday/static/js/453.fc646f18.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d175e981.css",
-    "static/js/main.9d19c065.js"
+    "static/css/main.12c33c62.css",
+    "static/js/main.ed6d91af.js"
   ]
 }
