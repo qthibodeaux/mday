@@ -23,6 +23,7 @@ function App() {
   const audioRef = useRef(null);
   const [needsPlayTap, setNeedsPlayTap] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoadingSong, setIsLoadingSong] = useState(true);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -39,6 +40,7 @@ function App() {
         .then(() => {
           setNeedsPlayTap(false);
           setIsPlaying(true);
+          setIsLoadingSong(false);
           fadeInterval = window.setInterval(() => {
             audio.volume = Math.min(audio.volume + 0.025, 0.55);
 
@@ -50,8 +52,9 @@ function App() {
         .catch(() => {
           setNeedsPlayTap(true);
           setIsPlaying(false);
+          setIsLoadingSong(false);
         });
-    }, 3000);
+    }, 5000);
 
     return () => {
       window.clearTimeout(startTimer);
@@ -69,18 +72,31 @@ function App() {
     audio.play().then(() => {
       setNeedsPlayTap(false);
       setIsPlaying(true);
+      setIsLoadingSong(false);
     });
   };
 
-  const stopSong = () => {
+  const pauseSong = () => {
     const audio = audioRef.current;
     if (!audio) {
       return;
     }
 
     audio.pause();
-    audio.currentTime = 0;
     setIsPlaying(false);
+  };
+
+  const toggleSong = () => {
+    if (isLoadingSong) {
+      return;
+    }
+
+    if (isPlaying) {
+      pauseSong();
+      return;
+    }
+
+    playSong();
   };
 
   return (
@@ -147,14 +163,22 @@ function App() {
       <div className="music-control" aria-live="polite">
         <div>
           <span className="music-label">Now Playing</span>
-          <strong>{isPlaying ? "A Song for Mama" : "Mom's song is ready"}</strong>
+          <strong>
+            {isLoadingSong
+              ? 'Loading song...'
+              : isPlaying
+                ? 'A Song for Mama'
+                : "Mom's song is paused"}
+          </strong>
         </div>
         <button
-          className="music-button"
+          className={`music-button${isLoadingSong ? ' loading' : ''}`}
           type="button"
-          onClick={isPlaying ? stopSong : playSong}
+          onClick={toggleSong}
+          disabled={isLoadingSong}
         >
-          {isPlaying ? 'Stop' : needsPlayTap ? 'Play' : 'Play'}
+          {isLoadingSong && <span className="spinner" aria-hidden="true" />}
+          {isLoadingSong ? 'Wait' : isPlaying ? 'Pause' : needsPlayTap ? 'Play' : 'Play'}
         </button>
       </div>
     </main>
