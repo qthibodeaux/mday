@@ -193,7 +193,7 @@
 
 .music-button {
   flex: 0 0 auto;
-  min-width: 78px;
+  min-width: 54px;
   min-height: 44px;
   display: inline-flex;
   align-items: center;
@@ -208,6 +208,20 @@
   font: inherit;
   font-size: 0.95rem;
   font-weight: 800;
+}
+
+.music-button-symbol {
+  font-size: 1.12rem;
+  line-height: 1;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
 }
 
 .music-button:hover:not(:disabled) {
@@ -256,6 +270,6 @@
   }
 
   .music-button {
-    min-width: 72px;
+    min-width: 54px;
   }
 }

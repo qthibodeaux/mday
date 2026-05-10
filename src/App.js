@@ -21,7 +21,6 @@ const lunchItems = [
 
 function App() {
   const audioRef = useRef(null);
-  const [needsPlayTap, setNeedsPlayTap] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoadingSong, setIsLoadingSong] = useState(true);
 
@@ -38,7 +37,6 @@ function App() {
       audio
         .play()
         .then(() => {
-          setNeedsPlayTap(false);
           setIsPlaying(true);
           setIsLoadingSong(false);
           fadeInterval = window.setInterval(() => {
@@ -50,7 +48,6 @@ function App() {
           }, 150);
         })
         .catch(() => {
-          setNeedsPlayTap(true);
           setIsPlaying(false);
           setIsLoadingSong(false);
         });
@@ -70,7 +67,6 @@ function App() {
 
     audio.volume = 0.55;
     audio.play().then(() => {
-      setNeedsPlayTap(false);
       setIsPlaying(true);
       setIsLoadingSong(false);
     });
@@ -178,7 +174,12 @@ function App() {
           disabled={isLoadingSong}
         >
           {isLoadingSong && <span className="spinner" aria-hidden="true" />}
-          {isLoadingSong ? 'Wait' : isPlaying ? 'Pause' : needsPlayTap ? 'Play' : 'Play'}
+          <span className="music-button-symbol" aria-hidden="true">
+            {isLoadingSong ? '' : isPlaying ? '||' : '>'}
+          </span>
+          <span className="sr-only">
+            {isLoadingSong ? 'Loading song' : isPlaying ? 'Pause song' : 'Play song'}
+          </span>
         </button>
       </div>
     </main>
